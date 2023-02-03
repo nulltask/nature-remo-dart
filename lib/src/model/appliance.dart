@@ -13,12 +13,12 @@ class Appliance {
   final String nickname;
   final Image image;
   final ApplianceType type;
-  final AirConSetting airConSetting;
-  final AirCon airCon;
+  final AirConSetting? airConSetting;
+  final AirCon? airCon;
   final List<Signal> signals;
-  final Tv tv;
-  final Light light;
-  final SmartMeter smartMeter;
+  final Tv? tv;
+  final Light? light;
+  final SmartMeter? smartMeter;
 
   Appliance({
     required this.id,
@@ -27,12 +27,12 @@ class Appliance {
     required this.nickname,
     required this.image,
     required this.type,
-    required this.airConSetting,
-    required this.airCon,
+    this.airConSetting,
+    this.airCon,
     required this.signals,
-    required this.tv,
-    required this.light,
-    required this.smartMeter,
+    this.tv,
+    this.light,
+    this.smartMeter,
   });
 
   factory Appliance.fromJson(Map<String, dynamic> json) {
@@ -43,15 +43,19 @@ class Appliance {
         nickname: json['nickname'] as String,
         image: json['image'] as Image,
         type: ApplianceTypeExt.fromText(json['type']),
-        airConSetting: AirConSetting.fromJson(json['settings']),
-        airCon: AirCon.fromJson(json['aircon']),
+        airConSetting: json['settings'] == null
+            ? null
+            : AirConSetting.fromJson(json['settings']),
+        airCon: json['aircon'] == null ? null : AirCon.fromJson(json['aircon']),
         signals: List.from(
             (json['signals'] as Iterable).map((e) => Signal.fromJson(e))),
-        tv: Tv.fromJson(json['tv']),
-        light: Light.fromJson(json['light']),
-        smartMeter: SmartMeter.fromJson(
-          json['smart_meter'],
-        ));
+        tv: json['tv'] == null ? null : Tv.fromJson(json['tv']),
+        light: json['light'] == null ? null : Light.fromJson(json['light']),
+        smartMeter: json['smart_meter'] == null
+            ? null
+            : SmartMeter.fromJson(
+                json['smart_meter'],
+              ));
   }
 }
 
