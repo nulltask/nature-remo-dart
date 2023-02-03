@@ -119,6 +119,8 @@ enum AirVolume {
 
 enum AirDirection {
   auto,
+  swing,
+  still,
 }
 
 extension ACButtonExt on ACButton {
@@ -208,10 +210,14 @@ extension AirDirectionExt on AirDirection {
     switch (this) {
       case AirDirection.auto:
         return '';
+      case AirDirection.swing:
+        return 'swing';
+      case AirDirection.still:
+        return 'still';
     }
   }
 
   static AirDirection fromString(String text) {
-    return AirDirection.values.firstWhere((e) => e.text == text);
+    return AirDirection.values.firstWhere((e) => e.text == text, orElse: () => AirDirection.auto);
   }
 }
