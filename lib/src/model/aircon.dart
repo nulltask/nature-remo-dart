@@ -88,6 +88,7 @@ enum ACButton {
   powerOn,
   powerOff,
   airdirSwing,
+  airdirTilt,
 }
 
 enum OperationMode {
@@ -133,6 +134,8 @@ extension ACButtonExt on ACButton {
         return 'power-off';
       case ACButton.airdirSwing:
         return 'airdir-swing';
+      case ACButton.airdirTilt:
+        return 'airdir-tilt';
     }
   }
 
@@ -142,8 +145,10 @@ extension ACButtonExt on ACButton {
         return ACButton.powerOn;
       case 'power-off':
         return ACButton.powerOff;
-     case 'airdir-swing':
+      case 'airdir-swing':
         return ACButton.airdirSwing;
+      case 'airdir-tilt':
+        return ACButton.airdirTilt;
       default:
         return throw Exception();
     }
