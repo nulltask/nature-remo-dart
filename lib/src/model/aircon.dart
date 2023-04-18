@@ -185,7 +185,7 @@ extension AirVolumeExt on AirVolume {
   String get text {
     switch (this) {
       case AirVolume.auto:
-        return 'auto';
+        return '';
       case AirVolume.one:
         return '1';
       case AirVolume.two:
@@ -228,6 +228,7 @@ extension AirDirectionExt on AirDirection {
   }
 
   static AirDirection fromString(String text) {
-    return AirDirection.values.firstWhere((e) => e.text == text, orElse: () => AirDirection.auto);
+    return AirDirection.values
+        .firstWhere((e) => e.text == text, orElse: () => AirDirection.auto);
   }
 }
